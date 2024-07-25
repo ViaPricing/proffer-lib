@@ -1,32 +1,26 @@
 import logging
 
-from logstash_async.handler import SynchronousLogstashHandler
 
 from proffer.observability.logs.formatter import JsonFormatter
-from proffer.observability.logs.logger_config import LoggerConfig
 
+from typing import Optional
 
 class ProfferLogger:
     PROJECT_NAME = "proffer"
+    handler: Optional[logging.Handler]
 
-    def __init__(self, config: LoggerConfig, **kwargs):
-        self.host = config.host
-        self.port = config.port
-
-        name = f"{self.PROJECT_NAME}.{config.resource['name']}.{config.resource['id']}"
+    def __init__(self, id: str, name: str, **kwargs):
+        name = f"{self.PROJECT_NAME}.{name}.{id}"
 
         self.remove_logger_handlers(name)
         self.logger = logging.getLogger(name)
         self.logger.setLevel(logging.DEBUG)
 
-        if kwargs.get("formatter", None):
-            self.formatter = kwargs.get("formatter")
-        else:
-            self.formatter = JsonFormatter()
+        formatter = kwargs.get("formatter", None)
+        self.formatter = formatter if formatter else JsonFormatter()
 
-        self.handler = SynchronousLogstashHandler(
-            self.host, self.port, database_path=None
-        )
+        handler = kwargs.get("handler", None)
+        self.handler = handler if handler else logging.StreamHandler()
         self.handler.setFormatter(self.formatter)
         self.logger.addHandler(self.handler)
 
@@ -51,12 +45,7 @@ class ProfferLogger:
 
 
 class WebScraperLogger(ProfferLogger):
-    name = "web_scraper"
 
-    def __init__(self, id: str, config: LoggerConfig, formatter: JsonFormatter = None):
-        config.resource = {
-            "name": self.name,
-            "id": id,
-        }
-
-        super().__init__(config, formatter=formatter)
+    def __init__(self, identifier: str, formatter: JsonFormatter = None, handler: Optional[logging.Handler] = None):
+        name = "web_scraper"
+        super().__init__(identifier, name, formatter=formatter, handler=handler)
