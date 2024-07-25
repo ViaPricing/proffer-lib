@@ -1,6 +1,7 @@
+import os
+
 class LoggerConfig:
     def __init__(self):
-        self.name = "menor_preco"
-        self.host = "localhost"
-        self.port = 50000
-        self.resource = None
+        self.host = os.getenv("LOGGER_HOST", "localhost")
+        self.port = os.getenv("LOGGER_PORT", 50000)
+    
