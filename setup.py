@@ -31,6 +31,7 @@ setup(
         "proffer",
         "proffer.observability",
         "proffer.observability.logs",
+        "proffer.observability.exceptions",
     ],
     install_requires=requirements,
 )
