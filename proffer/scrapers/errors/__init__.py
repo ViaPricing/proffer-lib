@@ -1,16 +1,11 @@
-class EmptyResponseError(Exception):
+class CustomError(Exception):
+    """Base class for other exceptions"""
+    pass
 
-    def __init__(self, *args: object) -> None:
-        super().__init__(*args)
-
-
-class AuthorizationDenied(Exception):
-
-    def __init__(self, *args: object) -> None:
-        super().__init__(*args)
+class EmptyResponseError(CustomError):
+    """Raised when the response is empty"""
 
 
-class NetworkError(Exception):
+class AuthorizationDenied(CustomError):
+    """Raised when the user is not authorized to access a resource"""
 
-    def __init__(self, *args: object) -> None:
-        super().__init__(*args)
