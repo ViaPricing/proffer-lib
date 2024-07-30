@@ -33,6 +33,7 @@ setup(
         "proffer.observability.logs",
         "proffer.scrapers",
         "proffer.scrapers.errors",
+        "proffer.utils"
     ],
     install_requires=requirements,
 )

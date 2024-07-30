@@ -1,8 +1,6 @@
 import logging
 
-
-from proffer.observability.logs.formatter import JsonFormatter
-
+from proffer.observability.logs import JsonFormatter
 from typing import Optional
 
 class ProfferLogger:
