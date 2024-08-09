@@ -11,3 +11,6 @@ class EmptyResponseError(CustomError):
 class AuthorizationDenied(CustomError):
     """Raised when the user is not authorized to access a resource"""
 
+class ProxyError(CustomError):
+    """Raised when a proxy error occurs"""
+
