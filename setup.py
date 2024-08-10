@@ -34,6 +34,7 @@ setup(
         "proffer.observability.analytics",
         "proffer.scrapers",
         "proffer.scrapers.errors",
+        "proffer.scrapers.analytics",
         "proffer.utils",
         "proffer.services",
     ],

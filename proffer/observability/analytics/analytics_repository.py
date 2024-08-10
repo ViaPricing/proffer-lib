@@ -9,10 +9,11 @@ class AnalyticsRepository:
         self.db_connection = db_connection
 
     def insert_data(self, table: str, data: Dict[str, Any]) -> None:
+        formatted_data = self.format_data(data)
         try:
             self.db_connection.connect()
-            columns = data.keys()
-            values = [data[column] for column in columns]
+            columns = formatted_data.keys()
+            values = [formatted_data[column] for column in columns]
 
             insert_query = sql.SQL(
                 "INSERT INTO {table} ({fields}) VALUES ({values})"
@@ -31,3 +32,8 @@ class AnalyticsRepository:
                 self.db_connection.connection.rollback()
         finally:
             self.db_connection.close()
+
+
+    # create a template method for the repository to format data
+    def format_data(self, data: Dict[str, Any]) -> Dict[str, Any]:
+        pass
