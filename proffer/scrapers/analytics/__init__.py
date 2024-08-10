@@ -47,4 +47,5 @@ def format_data(data):
           'municipio': data.get('municipio', None),
           'descricao': data.get('descricao', None),
           'categoria': data.get('categoria', None),
+          'status': data.get('status', None),
       }
