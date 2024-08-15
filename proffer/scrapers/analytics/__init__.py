@@ -1,7 +1,5 @@
 from typing import Any, Dict
 from datetime import datetime
-from proffer.services.database import DatabaseConnection
-from proffer.observability.analytics.analytics_repository import AnalyticsRepository
 import requests
 import os
 
