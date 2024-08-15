@@ -24,11 +24,11 @@ def send_to_analytics(table: str, data: Dict[str, Any]) -> None:
     url = os.getenv("HASURA_URL")
     headers = {
         "Content-Type": "application/json",
-        "x-hasura-admin-secret": os.getenv("HASURA_ADMIN_SECRET"),
+        "x-hasura-admin-secret": os.getenv("X_HASURA_ADMIN_SECRET"),
     }
 
     if not url or not headers["x-hasura-admin-secret"]:
-       print("Missing HASURA_URL or HASURA_ADMIN_SECRET")
+       print("Missing HASURA_URL or X_HASURA_ADMIN_SECRET")
        return
         
     requests.post(url, json={"object": dto}, headers=headers)
