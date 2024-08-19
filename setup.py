@@ -37,6 +37,7 @@ setup(
         "proffer.scrapers.analytics",
         "proffer.utils",
         "proffer.services",
+        "proffer.alerts",
     ],
     install_requires=requirements,
 )
