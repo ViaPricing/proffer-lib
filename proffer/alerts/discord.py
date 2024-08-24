@@ -10,21 +10,24 @@ class Discord:
             print("Discord token or bot id not found in environment variables")
     
     def send_alert(self, message: str, error, metadata):
-        formated_msg = f"{message}: {str(error)}, {metadata}"
         date_time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        
+        description = (
+            f"Scraper: {metadata.get('scraper_name', 'N/A')}\n"
+            f"Date: {date_time}\n"
+            f"Token: {metadata.get('token', 'N/A')}\n"
+            f"Erro: {str(error)}"
+        )
         
         payload = {
             "embeds": [
                 {
-                    "title": "Token Inválido",
-                    "description": formated_msg,
-                    "fields": [
-                        {"name": "Scraper", "value": str(metadata.get('scraper_name', 'N/A')), "inline": True},
-                        {"name": "Date", "value": date_time, "inline": True},
-                        {"name": "Token", "value": str(metadata.get('token', 'N/A')), "inline": True},
-                        {"name": "Message", "value": formated_msg, "inline": False}
-                    ],
-                    "color": 15158332 
+                    "title": message,
+                    "description": description,
+                    "color": 15158332,
+                    "thumbnail": {
+                        "url": ""  # Adicionar a thumbnail da Proffer
+                    }
                 }
             ]
         }
